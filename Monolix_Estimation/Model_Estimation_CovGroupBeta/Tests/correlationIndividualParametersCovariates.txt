@@ -1,0 +1,2 @@
+parameter,covariate,statistics,p-value,test
+beta_N_pow,groupVsnaive,199.371,1.56749e-11,Fisher
