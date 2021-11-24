@@ -1,0 +1,138 @@
+********************************************************************************
+*                        TimeCov_beta_Marker3.mlxtran                          *
+*                        November 24, 2021 at 00:46:04                         *
+*                        Monolix version : 5.1.0                               *
+********************************************************************************
+
+
+POPULATION PARAMETERS ESTIMATION _______________________________________________
+
+Fixed Effects ----------------------------     se_sa    rse(%)
+beta_N_pow_pop                 :      -6.9     0.363      5.26
+fact_beta_T_pop                :         0                    
+fact_delta_T_pop               :         0                    
+delta_N_pop                    :      1.69     0.957      56.5
+c_pop                          :         3                    
+cI_pop                         :        20                    
+k_pop                          :         3                    
+g_pop                          :         0                    
+mu_pop                         :     0.001                    
+P_N_pop                        :   1.03e+4   8.93e+3      86.5
+fact_P_T_pop                   :     -2.51     0.372      14.8
+alpha_VLSG_pop                 :      1.43     0.118      8.25
+thresh_Weight_pop              :       4.5                    
+beta_immuno_pop                :   1.31e-7   3.09e-8      23.6
+
+Standard Deviation of the Random Effects -
+omega_beta_N_pow               :      1.12     0.356      31.8
+omega_delta_N                  :      0.25     0.481       192
+
+Error Model Parameters -------------------
+a1                             :      1.06     0.115      10.9
+
+a2                             :      1.07     0.242      22.7
+
+a3                             :       1.2      0.11      9.19
+
+a4                             :      1.47      0.25        17
+
+Elapsed time (seconds) :   1.1e+3
+
+ _______________________________________________________________________________
+
+
+
+CORRELATION MATRIX OF THE ESTIMATES ____________________________________________
+
+
+Fisher by Stochastic Approximation ---------------------------------------------
+Correlation Matrix :
+  beta_N_pow_pop         1
+     delta_N_pop   0.49188         1
+         P_N_pop   0.28623   0.90158         1
+    fact_P_T_pop  -0.14397  -0.24141    -0.342         1
+  alpha_VLSG_pop   0.10042   0.63578   0.75023  -0.17223         1
+ beta_immuno_pop  0.038812   0.14153   0.14409 -0.058501   0.10145         1
+omega_beta_N_pow  -0.41902  -0.79488  -0.73106   0.29481  -0.53813  -0.11615         1
+   omega_delta_N   0.48875   0.97709   0.88855  -0.26904   0.62722   0.14367  -0.80669         1
+              a1   0.13568   0.31106   0.29022  -0.15824   0.22504  0.038041  -0.20492   0.27557         1
+              a2   0.24451   0.70794   0.71685  -0.12053   0.45014    0.1038  -0.53486   0.68576   0.21997         1
+              a3 -0.090552  -0.19691  -0.21981   0.14292  -0.14313 -0.033646   0.19831   -0.2022 -0.064274  -0.13785         1
+              a4  0.074489   0.45264    0.5201  -0.10029   0.36721  0.074375  -0.34867   0.45012   0.12149   0.41127 -0.091246         1
+                               min       max   max/min
+Eigen values           :      0.02       5.4    2.7e+2
+
+Elapsed time (seconds) :      23
+
+ -------------------------------------------------------------------------------
+
+ _______________________________________________________________________________
+
+
+
+INDIVIDUAL PARAMETERS ESTIMATION _______________________________________________
+
+
+Individual Parameters Estimation by Conditional Mean ---------------------------
+                      min        Q1    median        Q3       max
+beta_N_pow    :      -8.4     -7.83     -7.22     -5.88     -4.71
+fact_beta_T   :         0         0         0         0         0
+fact_delta_T  :         0         0         0         0         0
+delta_N       :      1.21      1.57       1.8      1.91      2.11
+c             :         3         3         3         3         3
+cI            :        20        20        20        20        20
+k             :         3         3         3         3         3
+g             :         0         0         0         0         0
+mu            :     0.001     0.001     0.001     0.001     0.001
+P_N           :   1.03e+4   1.03e+4   1.03e+4   1.03e+4   1.03e+4
+fact_P_T      :     -2.51     -2.51     -2.51     -2.51     -2.51
+alpha_VLSG    :      1.43      1.43      1.43      1.43      1.43
+thresh_Weight :       4.5       4.5       4.5       4.5       4.5
+beta_immuno   :   1.31e-7   1.31e-7   1.31e-7   1.31e-7   1.31e-7
+
+Elapsed time (seconds) :     8.2
+
+ -------------------------------------------------------------------------------
+
+
+Individual Parameters Estimation by Conditional Mode ---------------------------
+                      min        Q1    median        Q3       max
+beta_N_pow    :     -8.35     -7.81     -7.19      -5.9     -4.76
+fact_beta_T   :         0         0         0         0         0
+fact_delta_T  :         0         0         0         0         0
+delta_N       :      1.24      1.56      1.75       1.9      2.08
+c             :         3         3         3         3         3
+cI            :        20        20        20        20        20
+k             :         3         3         3         3         3
+g             :         0         0         0         0         0
+mu            :     0.001     0.001     0.001     0.001     0.001
+P_N           :   1.03e+4   1.03e+4   1.03e+4   1.03e+4   1.03e+4
+fact_P_T      :     -2.51     -2.51     -2.51     -2.51     -2.51
+alpha_VLSG    :      1.43      1.43      1.43      1.43      1.43
+thresh_Weight :       4.5       4.5       4.5       4.5       4.5
+beta_immuno   :   1.31e-7   1.31e-7   1.31e-7   1.31e-7   1.31e-7
+
+Elapsed time (seconds) :    0.39
+
+ -------------------------------------------------------------------------------
+
+ _______________________________________________________________________________
+
+
+
+LOG-LIKELIHOOD ESTIMATION ______________________________________________________
+                                                            (is)
+
+-2 x log-likelihood                             :         707.60
+Akaike Information Criteria               (AIC) :         731.60
+Corrected Bayesian Information Criteria  (BICc) :         776.30
+Bayesian Information Criteria             (BIC) :         742.29
+
+Elapsed time                          (seconds) :          37.15
+
+
+[Importance Sampling] Standard error        : 0.040
+                      Sampling distribution : T-distribution with 5 degrees of freedom
+
+ _______________________________________________________________________________
+

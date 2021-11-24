@@ -1,0 +1,3 @@
+eta,covariate,statistics,p-value,test
+eta_beta_N_pow,Group,44.7157,4.78024e-7,Fisher
+eta_delta_N,Group,2.51285,0.114492,Fisher
