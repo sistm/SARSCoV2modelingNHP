@@ -1,0 +1,8 @@
+---
+title: "README"
+author: "Marie Alexandre"
+date: "2025-08-06"
+output: html_document
+---
+
+# Mechanistic modeling of viral dynamics and identification of mechanistic correlates of protection in NHP
