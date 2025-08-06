@@ -1,0 +1,29 @@
+---
+title: "#**Mechanistic modeling of viral dynamics & identification of mCoP in NHPs**\n"
+author: "Marie Alexandre"
+date: "`r Sys.Date()`"
+output:
+  md_document:
+    variant: markdown_github
+bibliography: Bibliography.bib
+csl: vancouver.csl
+---
+
+
+# **Mechanistic modeling of viral dynamics & identification of mCoP in NHPs**
+
+## **Objectives of the project**
+
+The code provided in this folder is an original code developed in the modeling work published by [@alexandre2022elife]. \n
+
+This work aimed at :
+
+**(1)** Modeling viral dynamics (genomic and subgenomic) collected in Non-Human Primates after Wuhan SARS-CoV-2 infection using a mechanistic modeling to understand and evaluate the immune mechanisms involved in the vaccine response. 
+
+**(2)** Identifying the vaccine-induced immune mechanisms of action and mechanistic correlate of protection (mCoP), i.e. immune markers capturing these effects. 
+
+
+
+\n
+
+## **Bibliography**
