@@ -11,6 +11,8 @@ csl: vancouver.csl
 
 
 # **Mechanistic modeling of viral dynamics & identification of mCoP in NHPs**
+Author: Marie Alexandre  
+Date: `r Sys.Date()`
 
 ## **Objectives of the project**
 

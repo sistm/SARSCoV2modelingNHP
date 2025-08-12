@@ -1,4 +1,14 @@
+\#**Mechanistic modeling of viral dynamics & identification of mCoP in
+NHPs**
+
+================
+Marie Alexandre
+2025-08-07
+
 # **Mechanistic modeling of viral dynamics & identification of mCoP in NHPs**
+
+Author: Marie Alexandre  
+Date: 2025-08-07
 
 ## **Objectives of the project**
 
@@ -18,6 +28,14 @@ capturing these effects.
 
 ## **Bibliography**
 
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+<div id="ref-alexandre2022elife" class="csl-entry">
+
 Alexandre M, Marlin R, Prague M, Coleon S, Kahlaoui N, Cardinaud S, et
 al. Modelling the response to vaccine in non-human primates to define
 SARS-CoV-2 mechanistic correlates of protection. elife. 2022;11:e75427.
+
+</div>
+
+</div>
