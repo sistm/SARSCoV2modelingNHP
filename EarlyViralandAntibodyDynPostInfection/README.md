@@ -1,9 +1,3 @@
-\#**Joint mechanistic modeling of viral and antibody responses to
-vaccines in NHPs**
-
-================
-Marie Alexandre
-2025-08-12
 
 # **Joint mechanistic modeling of viral and antibody responses to vaccines in NHPs**
 
