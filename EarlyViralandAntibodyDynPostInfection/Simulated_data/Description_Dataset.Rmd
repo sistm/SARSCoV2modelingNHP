@@ -1,0 +1,44 @@
+---
+# title: "#**Description of the dataset**\n"
+# author: "Marie Alexandre"
+# date: "`r Sys.Date()`"
+output:
+  md_document:
+    variant: markdown_github
+---
+
+
+
+# **Description of the dataset **
+Author: Marie Alexandre  
+Date: `r Sys.Date()`
+
+The file *Simulated_dataset_VL_BAb_NAb_Delta_PostExpo.txt* contains data (viral and antibody dynamics) that have been simulated from our original dataset. 
+
+
+```{r,echo=FALSE}
+library(knitr)
+table <- rbind(data.frame(`Column Name` = "SubjectID", Type = "character", Description = "Unique ID of NHPs included in the preclinical trial"),
+               data.frame(`Column Name` = "Group", Type = "character", Description = "Categorical variable defining the immunological group to which NHP belongs at the time of exposure (Delta infection). Six group categories are possible here: (1) `Naive` - NHPs free of any previous immunization, (2) `CD40.RBDv - Naive` - NHPs are only vaccinated with CD40.RBDv vaccine, (3) `Conv` - NHPs have been previously infected by Wuhan SARS-CoV-2, (4) `CD40.RBDv - Conv` - NHPs have been previously infected by Wuhan SARS-CoV-2 and then received CD40.RBDv vaccine, (5) `CD40.PanCoV - Conv` - NHPS have been previously infected by Wuhan SARS-CoV-2 and then received CD40.PanCoV vaccine, (6) `mRNA - Conv` - NHPs have been previously infected by Wuhan SARS-CoV-2 and then received original pfizer mRNA vaccine"),
+               data.frame(`Column Name` = "StatutImm", Type  = "character", Description = "Categorical variable defining whether NHPs have already been immunized (`Convalescent`) or not (`Naive`)."),
+               data.frame(`Column Name` = "DayPostExpo", Type = "Integer", Description = "Time in days since the exposure to Delta SARS-CoV-2"),
+               data.frame(`Column Name` = "Value", Type = "numeric", Description = "value of measurements collected in natural scale (cp/mL for viral loads, AU/mL for antibodies)"),
+               data.frame(`Column Name` = "Censored", Type = "Binary", Description = "Binary variable defining whether the observation is left-censored (`1`) or not (`0`). Limits of detection are fixed at 476 and 749 cp/mL for genomic and subgenomic viral loads, respectively, and at 0.1 AU/mL for neutralizing antibodies (no LOD for binding antibodies)."),
+               data.frame(`Column Name` = "CensoredValue", Type = "numeric", Description = "Observations accounting for censoring, i.e. either directly measured for uncensored data, or imputed to LOD value for left-censored data."),
+               data.frame(`Column Name` = "MeasureType", Type = "Character", Description = "Categorical variable defining the type of data is observed: (1) `gRNA` for genomic viral load, (2) `sgRNA` for subgenomic viral load, (3) `IgG CoV-2 RBD L452R T478K` for binding IgG against Delta RBD and (4) `ACE2 CoV-2 RBD L452R T478K` for antibodies inhibiting binding of the RBD domain to the ACE2 receptor."),
+               data.frame(`Column Name` = "SampleType", Type = "character", Description = "Categorical variable defining in which fluid measurements have been performed: (1) `Tracheal fluid` for viral loads collected in the trachea, (2) `Nasal fluid` for viral loads collected in the nasopharynx, and (3) `Serum` for antibodies (whether binding or neutralizing) collected in blood samples"),
+               data.frame(`Column Name` = "Observation", Type = "numeric",Description = "Value of measurements collected in log10 scale (log10 cp/mL for viral loads and log10 AU/mL for antibodies)"),
+               data.frame(`Column Name` = "CensObservations", Type = "numeric", Description = "Observations in log10 scale accounting for censoring, i.e. either directly measured for uncensored data, or imputed to LOD value (in log10 scale) for left-censored data. Column used as observation in Monolix for model estimation."),
+               data.frame(`Column Name` = "obsid", Type = "integrer", Description = "categorical variable added for Monolix and defining at each row the type of data observed: `1` for gRNA viral load in Trachea, `2` for sgRNA viral load in Trachea, `3` for gRNA viral load in Nasopharynx, `4` for sgRNA viral load in Nasopharynx, `5` for binding antiodies and `6` for neutralizing antibodies."),
+               data.frame(`Column Name` = "Inoc", Type = "numeric", Description = "Concentration of virions inoculated at exposure, in virions/mL. Used by Monolix as initial condition for inoculum compartment."),
+               data.frame(`Column Name` = "Inoc_VoC", Type = "character", Description = "Strain of SARS-CoV-2 virus used for infection."),
+               data.frame(`Column Name` = "Weight", Type = "numeric", Description = "Weight of NHPs, in Kgs"),
+               data.frame(`Column Name` = "BAb0", Type = "numeric", Description = "Value in AU/mL of binding antibodies collected at the time of exposure."),
+               data.frame(`Column Name` = "NAb0", Type = "numeric", Description = "Value in AU/mL of neutralizing antibodies collected at the time of exposure.")
+)
+
+kable(table, caption = NULL)
+```
+
+
+
