@@ -1,7 +1,7 @@
 ---
-title: "#**Joint mechanistic modeling of viral and antibody responses to vaccines in NHPs**\n"
-author: "Marie Alexandre"
-date: "`r Sys.Date()`"
+# title: "#**Joint mechanistic modeling of viral and antibody responses to vaccines in NHPs**\n"
+# author: "Marie Alexandre"
+# date: "`r Sys.Date()`"
 output:
   md_document:
     variant: markdown_github
