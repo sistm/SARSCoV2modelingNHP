@@ -1,0 +1,129 @@
+DESCRIPTION: Viral NHP model
+
+Model describing viral dynamics in NHP following SARS-CoV-2 infection.
+
+
+Model of viral loads [Alexandre et al., Elife 2023]:
+--------------------
+ - Target-cell limited model with inoculum 
+ - Genomic and subgenomic viral loads
+ - Viral dynamics in both Trachea and Nasopharynx
+ - The volume of distribution of Trachea and Nasopharynx defined by animal weights
+ 
+Model built to: 
+---------------
+ - Describe post-infection viral dynamics
+ - Consider a single infection
+
+
+
+[LONGITUDINAL]
+input = {
+; Parameters describing viral dynamics
+betas_N,fact_beta_T,fact_delta_T,delta_N,c,cI,k,mu,P_N,fact_P_T,alpha_VLSG,
+
+; Additional parameters and/or regressors
+Inoc,Weight,thresh_Weight}
+
+; Regressors
+; -----------
+Inoc = {use=regressor}     ; Inoculated virions
+Weight = {use=regressor}   ; NHP weights
+; -----------
+
+
+EQUATION:
+odeType = stiff
+
+
+; Physiological quantities [Alexandre et al. Elife 2023]
+; ------------------------
+if(Weight <= thresh_Weight)
+	W_N = 4
+	W_T = 2
+else
+	W_N = 5.5
+	W_T = 3
+end
+
+
+InoculumBaseline = Inoc   ; in virions/mL
+; -----------
+
+
+ 
+; Initial Conditions
+; ------------------
+t0=0.01  ; We consider a slight time lag for infection as measures at t=0 were collected just before infection
+
+; Viral compartments
+ViniT_0 = 0.9*InoculumBaseline/W_T   ; in cells/ml
+ViniN_0 = 0.1*InoculumBaseline/W_N	 ; in cells/ml
+VIT_0 = 0  
+VIN_0 = 0
+VNIT_0 = 0
+VNIN_0 = 0
+
+; Target-cell compartments
+TN_0 = 1.25*10^5/W_N ; 	From Gonçalves et al. (2020) ; in cells/ml
+TT_0 = 2.25*10^4/W_T ; 	From Gonçalves et al. (2020) ; in cells/ml
+I1T_0 = 0;
+I1N_0 = 0;
+I2T_0 = 0;
+I2N_0 = 0;
+
+
+
+; Dynamical model
+; ---------------
+beta_N = betas_N*1E-5
+beta_T = beta_N*exp(fact_beta_T)
+
+delta_T = delta_N*exp(fact_delta_T)		
+
+P_T = P_N*exp(fact_P_T)
+
+; Model for Trachea (concentration)
+ddt_TT    = -beta_T*TT*VIT - mu*beta_T*TT*ViniT ; 
+ddt_I1T   = beta_T*TT*VIT + mu*beta_T*TT*ViniT - k*I1T ; 
+ddt_I2T   = k*I1T - delta_T*I2T ; 
+ddt_VIT   = P_T*I2T*mu - c*VIT -beta_T*TT*VIT ; 
+ddt_VNIT  = P_T*I2T*(1-mu) - c*VNIT ;
+ddt_ViniT = -cI*ViniT - mu*beta_T*TT*ViniT ; 			Equation of the inoculum
+
+
+; Model for Nasopharynx (concentration)
+ddt_TN    = -beta_N*TN*VIN - mu*beta_N*TN*ViniN; 
+ddt_I1N   = beta_N*TN*VIN + mu*beta_N*TN*ViniN - k*I1N ; 
+ddt_I2N   = k*I1N - delta_N*I2N ; 
+ddt_VIN   = P_N*I2N*mu - c*VIN -beta_N*TN*VIN ;
+ddt_VNIN  = P_N*I2N*(1-mu) - c*VNIN ; 
+ddt_ViniN = -cI*ViniN - mu*beta_N*TN*ViniN ;			Equation of the inoculum
+; ---------------
+
+
+; Observation Model 
+; ---------------
+; We impose positive values to I1 and I2
+I1N_pos = max(I1N,0)
+I2N_pos = max(I2N,0)
+I1T_pos = max(I1T,0)
+I2T_pos= max(I2T,0)
+
+if t <= 0
+  VLSGTrachea = -3 
+  VLTrachea   = -3
+  VLSGNaso    = -3
+  VLNaso      = -3
+else 
+  VLSGTrachea = alpha_VLSG*max(log10((I1T_pos+I2T_pos)),-3)    
+  VLTrachea = max(log10((VIT+VNIT+ViniT)),-3)   
+  VLSGNaso = alpha_VLSG*max(log10((I1N_pos+I2N_pos)),-3)  
+  VLNaso = max(log10((VIN+VNIN+ViniN)),-3) 
+end
+; ---------------
+
+
+OUTPUT:
+output = {VLTrachea,VLSGTrachea,VLNaso,VLSGNaso}
+table = {TT,I1T,I2T,VIT,VNIT,ViniT,TN,I1N,I2N,VIN,VNIN,ViniN}
