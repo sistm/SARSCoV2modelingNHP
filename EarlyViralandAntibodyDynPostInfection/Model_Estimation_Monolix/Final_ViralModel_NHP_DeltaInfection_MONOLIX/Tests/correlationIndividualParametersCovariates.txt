@@ -1,0 +1,5 @@
+parameter,covariate,statistics,p-value,test
+betas_N,beta_betas_N_CD40PanCovConv_1,-205.39,<2.2e-16,t-Test
+betas_N,beta_betas_N_CD40RBDvConv_1,-137.799,<2.2e-16,t-Test
+betas_N,beta_betas_N_mRNAConv_1,-285.36,<2.2e-16,t-Test
+delta_N,beta_delta_N_Conv_1,2.36984,0.0239922,t-Test

@@ -1,0 +1,5 @@
+parameter,statistics(sa),p-value(sa)
+beta_betas_N_CD40PanCovConv_1,8.21958,2.22e-16
+beta_betas_N_CD40RBDvConv_1,4.81193,1.49e-06
+beta_betas_N_mRNAConv_1,12.6698,<2.2e-16
+beta_delta_N_Conv_1,1.9938,0.0462

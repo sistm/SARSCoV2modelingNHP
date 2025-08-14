@@ -1,0 +1,2 @@
+eta1,eta2,coeff,statistics,p-value
+eta_betas_N,eta_delta_N,0,-1.28603,0.207383

@@ -1,0 +1,167 @@
+<DATAFILE>
+
+[FILEINFO]
+file='../../../Simulated_data/Simulated_dataset_VL_BAb_NAb_Delta_PostExpo.txt'
+delimiter = tab
+header={SubjectID, Group, StatutImm, DayPostExpo, Value, Censored, CensoredValue, MeasureType, SampleType, Observation, CensObservation, obsid, Inoc, Inoc_Voc, Weight, BAb0, NAb0}
+
+[CONTENT]
+SubjectID = {use=identifier}
+Group = {use=covariate, type=categorical}
+DayPostExpo = {use=time}
+Censored = {use=censored}
+CensObservation = {use=observation, yname={'1', '2', '3', '4', '5', '6'}, type={continuous, continuous, continuous, continuous, continuous, continuous}}
+obsid = {use=observationtype}
+Inoc = {use=regressor}
+Weight = {use=regressor}
+
+[SETTINGS]
+dataType = {'1'=plasma, '2'=plasma, '3'=plasma, '4'=plasma, '5'=plasma, '6'=plasma}
+
+<MODEL>
+
+[COVARIATE]
+input = Group
+
+Group = {type=categorical, categories={'CD40.PanCoV - Conv', 'CD40.RBDv - Conv', 'CD40.RBDv - Naive', 'Conv', 'Naive', 'mRNA - Conv'}}
+
+DEFINITION:
+GroupEffect =
+{
+  transform = Group, 
+  categories = {
+  'Naive' = {'Naive'},
+  'CD40RBDv' = {'CD40.RBDv - Naive'},
+  'Conv' = {'Conv'},
+  'CD40RBDvConv' = {'CD40.RBDv - Conv'},
+  'mRNAConv' = {'mRNA - Conv'},
+  'PanCoVConv' = {'CD40.PanCoV - Conv'}  }, 
+  reference = 'Naive'
+}
+
+CD40RBDvNaive =
+{
+  transform = Group, 
+  categories = {
+  '0' = {'Naive', 'Conv', 'CD40.RBDv - Conv', 'CD40.PanCoV - Conv', 'mRNA - Conv'},
+  '1' = {'CD40.RBDv - Naive'}  }, 
+  reference = '0'
+}
+
+Conv =
+{
+  transform = Group, 
+  categories = {
+  '0' = {'Naive', 'CD40.RBDv - Naive', 'CD40.RBDv - Conv', 'CD40.PanCoV - Conv', 'mRNA - Conv'},
+  '1' = {'Conv'}  }, 
+  reference = '0'
+}
+
+CD40RBDvConv =
+{
+  transform = Group, 
+  categories = {
+  '0' = {'Naive', 'CD40.RBDv - Naive', 'Conv', 'CD40.PanCoV - Conv', 'mRNA - Conv'},
+  '1' = {'CD40.RBDv - Conv'}  }, 
+  reference = '0'
+}
+
+CD40PanCovConv =
+{
+  transform = Group, 
+  categories = {
+  '0' = {'Naive', 'CD40.RBDv - Naive', 'Conv', 'CD40.RBDv - Conv', 'mRNA - Conv'},
+  '1' = {'CD40.PanCoV - Conv'}  }, 
+  reference = '0'
+}
+
+mRNAConv =
+{
+  transform = Group, 
+  categories = {
+  '0' = {'Naive', 'CD40.RBDv - Naive', 'Conv', 'CD40.RBDv - Conv', 'CD40.PanCoV - Conv'},
+  '1' = {'mRNA - Conv'}  }, 
+  reference = '0'
+}
+
+[INDIVIDUAL]
+input = {P_N_pop, alpha_VLSG_pop, betas_N_pop, omega_betas_N, c_pop, cI_pop, delta_N_pop, omega_delta_N, fact_P_T_pop, fact_beta_T_pop, fact_delta_T_pop, k_pop, mu_pop, thresh_Weight_pop, Conv, beta_delta_N_Conv_1, CD40PanCovConv, beta_betas_N_CD40PanCovConv_1, CD40RBDvConv, beta_betas_N_CD40RBDvConv_1, mRNAConv, beta_betas_N_mRNAConv_1}
+
+Conv = {type=categorical, categories={'0', '1'}}
+CD40PanCovConv = {type=categorical, categories={'0', '1'}}
+CD40RBDvConv = {type=categorical, categories={'0', '1'}}
+mRNAConv = {type=categorical, categories={'0', '1'}}
+
+DEFINITION:
+P_N = {distribution=logNormal, typical=P_N_pop, no-variability}
+alpha_VLSG = {distribution=logNormal, typical=alpha_VLSG_pop, no-variability}
+betas_N = {distribution=logNormal, typical=betas_N_pop, covariate={CD40PanCovConv, CD40RBDvConv, mRNAConv}, coefficient={{0, beta_betas_N_CD40PanCovConv_1}, {0, beta_betas_N_CD40RBDvConv_1}, {0, beta_betas_N_mRNAConv_1}}, sd=omega_betas_N}
+c = {distribution=logNormal, typical=c_pop, no-variability}
+cI = {distribution=logNormal, typical=cI_pop, no-variability}
+delta_N = {distribution=logNormal, typical=delta_N_pop, covariate=Conv, coefficient={0, beta_delta_N_Conv_1}, sd=omega_delta_N}
+fact_P_T = {distribution=normal, typical=fact_P_T_pop, no-variability}
+fact_beta_T = {distribution=normal, typical=fact_beta_T_pop, no-variability}
+fact_delta_T = {distribution=normal, typical=fact_delta_T_pop, no-variability}
+k = {distribution=logNormal, typical=k_pop, no-variability}
+mu = {distribution=logNormal, typical=mu_pop, no-variability}
+thresh_Weight = {distribution=logNormal, typical=thresh_Weight_pop, no-variability}
+
+[LONGITUDINAL]
+input = {a1, a2, a3, a4}
+
+file = '../../MlxtranCode_NHP_ViralModel_Monolix.txt'
+
+DEFINITION:
+y1 = {distribution=normal, prediction=VLTrachea, errorModel=constant(a1)}
+y2 = {distribution=normal, prediction=VLSGTrachea, errorModel=constant(a2)}
+y3 = {distribution=normal, prediction=VLNaso, errorModel=constant(a3)}
+y4 = {distribution=normal, prediction=VLSGNaso, errorModel=constant(a4)}
+
+<FIT>
+data = {'1', '2', '3', '4'}
+model = {y1, y2, y3, y4}
+
+<PARAMETER>
+P_N_pop = {value=1000, method=MLE}
+a1 = {value=1, method=MLE}
+a2 = {value=1, method=MLE}
+a3 = {value=1, method=MLE}
+a4 = {value=1, method=MLE}
+alpha_VLSG_pop = {value=1.4, method=MLE}
+beta_betas_N_CD40PanCovConv_1 = {value=0, method=MLE}
+beta_betas_N_CD40RBDvConv_1 = {value=0, method=MLE}
+beta_betas_N_mRNAConv_1 = {value=0, method=MLE}
+beta_delta_N_Conv_1 = {value=0, method=MLE}
+betas_N_pop = {value=50, method=MLE}
+cI_pop = {value=20, method=FIXED}
+c_pop = {value=3, method=FIXED}
+delta_N_pop = {value=0.5, method=MLE}
+fact_P_T_pop = {value=0, method=MLE}
+fact_beta_T_pop = {value=0, method=FIXED}
+fact_delta_T_pop = {value=0, method=FIXED}
+k_pop = {value=3, method=FIXED}
+mu_pop = {value=0.001, method=FIXED}
+omega_betas_N = {value=1, method=MLE}
+omega_delta_N = {value=1, method=MLE}
+thresh_Weight_pop = {value=4.5, method=FIXED}
+
+<MONOLIX>
+
+[TASKS]
+populationParameters()
+individualParameters(method = {conditionalMean, conditionalMode })
+fim(method = StochasticApproximation)
+logLikelihood(method = ImportanceSampling)
+plotResult(run = false,method = {indfits, parameterdistribution, covariancemodeldiagnosis, covariatemodeldiagnosis, obspred, vpc, residualsscatter, residualsdistribution, randomeffects, saemresults })
+
+[SETTINGS]
+GLOBAL:
+exportpath = '../'
+
+POPULATION:
+exploratoryiterations = 800
+simulatedannealingiterations = 800
+
+FIM:
+maxiterations = 5000
+

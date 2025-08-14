@@ -1,0 +1,154 @@
+********************************************************************************
+*             Final_ViralModel_NHP_DeltaInfection_MONOLIX.mlxtran              *
+*             August 14, 2025 at 10:17:38                                      *
+*             Monolix version : 2023R1                                         *
+********************************************************************************
+
+
+ESTIMATION OF THE POPULATION PARAMETERS ________________________________________
+
+Fixed Effects ----------------------------     se_sa    rse(%)
+betas_N_pop                   :       14.2      2.04      14.3
+beta_betas_N_CD40PanCovConv_1 :       -8.4      1.02      12.2
+beta_betas_N_CD40RBDvConv_1   :      -5.26      1.09      20.8
+beta_betas_N_mRNAConv_1       :      -10.9     0.856      7.89
+fact_beta_T_pop               :          0                    
+fact_delta_T_pop              :          0                    
+delta_N_pop                   :        1.9     0.535      28.2
+beta_delta_N_Conv_1           :      0.968     0.485      50.2
+c_pop                         :          3                    
+cI_pop                        :         20                    
+k_pop                         :          3                    
+mu_pop                        :      0.001                    
+P_N_pop                       :   1.09e+04  1.16e+03      10.6
+fact_P_T_pop                  :      0.505     0.107      21.2
+alpha_VLSG_pop                :       1.55    0.0455      2.94
+thresh_Weight_pop             :        4.5                    
+
+Standard Deviation of the Random Effects -
+omega_betas_N                 :      0.176     0.141      80.2
+omega_delta_N                 :      0.931     0.161      17.3
+
+Error Model Parameters -------------------
+a1                            :       1.13    0.0794      7.03
+a2                            :       1.55     0.138      8.92
+a3                            :       1.28    0.0833      6.49
+a4                            :       1.35     0.125      9.29
+
+Elapsed time (seconds):  2.1e+02
+Exploratory phase iterations:      276 (Autostop)
+Smoothing phase iterations:        106 (Autostop)
+
+ _______________________________________________________________________________
+
+
+
+ESTIMATION OF THE INDIVIDUAL PARAMETERS ________________________________________
+
+
+Estimation of the individual parameters by Conditional Distribution ------------
+                      min        Q1    median        Q3       max
+betas_N       :  0.000275   0.00323      6.29      14.5      18.7
+fact_beta_T   :         0         0         0         0         0
+fact_delta_T  :         0         0         0         0         0
+delta_N       :     0.463      1.08      2.46      5.01        14
+c             :         3         3         3         3         3
+cI            :        20        20        20        20        20
+k             :         3         3         3         3         3
+mu            :     0.001     0.001     0.001     0.001     0.001
+P_N           :  1.09e+04  1.09e+04  1.09e+04  1.09e+04  1.09e+04
+fact_P_T      :     0.505     0.505     0.505     0.505     0.505
+alpha_VLSG    :      1.55      1.55      1.55      1.55      1.55
+thresh_Weight :       4.5       4.5       4.5       4.5       4.5
+
+Elapsed time (seconds):        6
+Iterations:       81 (Autostop)
+
+ -------------------------------------------------------------------------------
+
+
+Estimation of the individual parameters by Conditional Mode --------------------
+                      min        Q1    median        Q3       max
+betas_N       :  0.000273   0.00315      6.26      14.1      18.7
+fact_beta_T   :         0         0         0         0         0
+fact_delta_T  :         0         0         0         0         0
+delta_N       :     0.459      1.02       2.3      3.87      13.3
+c             :         3         3         3         3         3
+cI            :        20        20        20        20        20
+k             :         3         3         3         3         3
+mu            :     0.001     0.001     0.001     0.001     0.001
+P_N           :  1.09e+04  1.09e+04  1.09e+04  1.09e+04  1.09e+04
+fact_P_T      :     0.505     0.505     0.505     0.505     0.505
+alpha_VLSG    :      1.55      1.55      1.55      1.55      1.55
+thresh_Weight :       4.5       4.5       4.5       4.5       4.5
+
+Elapsed time (seconds):     0.35
+
+ -------------------------------------------------------------------------------
+
+ _______________________________________________________________________________
+
+
+
+ESTIMATION OF THE FISHER INFORMATION MATRIX ____________________________________
+
+
+Estimation of the Fisher information matrix by Stochastic Approximation --------
+
+Correlation Matrix :
+                  betas_N_pop         1
+beta_betas_N_CD40PanCovConv_1  -0.56836         1
+  beta_betas_N_CD40RBDvConv_1  -0.62029   0.68101         1
+      beta_betas_N_mRNAConv_1   -0.4579   0.47964   0.52255         1
+                  delta_N_pop   -0.4789   0.58986   0.60524   0.49709         1
+          beta_delta_N_Conv_1   0.19841  -0.30788  -0.31971  -0.26265  -0.54014         1
+                      P_N_pop  -0.54636   0.23098   0.21109   0.15506   0.25831 -0.033021         1
+                 fact_P_T_pop  -0.04776 -0.068862  -0.11797 -0.065383 -0.013721 0.0060474  -0.05885         1
+               alpha_VLSG_pop  -0.37904   0.28776   0.31342   0.22838   0.27904 -0.046414   0.19455 0.0033078         1
+                omega_betas_N  -0.65356    0.7459   0.87736   0.57165   0.61441  -0.31572   0.27203 -0.070401   0.34029         1
+                omega_delta_N  0.055777 -0.089991 -0.027477  -0.25245  0.047568 -0.018069  0.095628  0.013073 -0.018755 -0.089905         1
+                           a1 -0.041586   0.13996   0.11281  0.053227  0.077439 -0.072619 -0.040585  -0.15595 -0.026946  0.096775 -0.096074         1
+                           a2   0.25252  -0.23976   -0.2862  -0.16532  -0.13531  0.062398 -0.064367   0.15585  -0.18128  -0.26186 0.0069875 -0.047232         1
+                           a3   0.17414  -0.24237  -0.27572  -0.21005  -0.14191  0.079906  -0.16316   0.11104 -0.058291  -0.26697  0.026469 -0.068512   0.10667         1
+                           a4   0.28442  -0.34293  -0.48687  -0.26532  -0.28385   0.18159  0.029413  0.054035  -0.11044  -0.43859  0.030592 -0.091704   0.15795   0.14973         1
+
+                               min       max   max/min
+Eigen values           :      0.11       4.9        46
+
+Elapsed time (seconds):       46
+Iterations:      212 (Autostop)
+
+ -------------------------------------------------------------------------------
+
+ _______________________________________________________________________________
+
+
+
+ESTIMATION OF THE LOG-LIKELIHOOD _______________________________________________
+
+                                                            (is)
+-2 x log-likelihood                       (OFV) :        1718.53
+Akaike Information Criteria               (AIC) :        1748.53
+Corrected Bayesian Information Criteria  (BICc) :        1805.02
+Bayesian Information Criteria             (BIC) :        1771.43
+
+Elapsed time                          (seconds) :          38.31
+CPU time                              (seconds) :          38.00
+MonteCarlo size (is):    10000 (Fixed number of iterations)
+
+
+[Importance Sampling] Standard error        : 0.069
+                      Sampling distribution : T-distribution with 5 degrees of freedom
+
+ _______________________________________________________________________________
+
+DATASET INFORMATION
+Number of individuals: 34
+Number of observations (obsid 1): 350
+Number of observations (obsid 2): 360
+Number of observations (obsid 3): 354
+Number of observations (obsid 4): 356
+Number of observations (obsid 5): 156
+Number of observations (obsid 6): 155
+Number of doses: 0
+
