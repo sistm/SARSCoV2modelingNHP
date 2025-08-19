@@ -1,0 +1,282 @@
+; -------------------------------------------
+; --- Definition of the Statistical model --- 
+; -------------------------------------------
+
+[COVARIATE]
+input = Group
+
+Group = {type=categorical, categories={'CD40.PanCoV - Conv', 'CD40.RBDv - Conv', 'CD40.RBDv - Naive', 'Conv', 'Naive', 'mRNA - Conv'}}
+
+DEFINITION:
+GroupEffect =
+{
+  transform = Group, 
+  categories = {
+  'PanCoVConv' = {'CD40.PanCoV - Conv'},
+  'CD40RBDvConv' = {'CD40.RBDv - Conv'},
+  'CD40RBDv' = {'CD40.RBDv - Naive'},
+  'Conv' = {'Conv'},
+  'Naive' = {'Naive'},
+  'mRNAConv' = {'mRNA - Conv'}  }, 
+  reference = 'Naive'
+}
+
+Convalescence =
+{
+  transform = Group, 
+  categories = {
+  '1' = {'CD40.PanCoV - Conv', 'CD40.RBDv - Conv', 'Conv', 'mRNA - Conv'},
+  '0' = {'CD40.RBDv - Naive', 'Naive'}  }, 
+  reference = '0'
+}
+
+ConvXVacc =
+{
+  transform = Group, 
+  categories = {
+  'mRNA' = {'mRNA - Conv'},
+  '0' = {'CD40.RBDv - Naive', 'Conv', 'Naive'},
+  'PanCov' = {'CD40.PanCoV - Conv'},
+  'CD40' = {'CD40.RBDv - Conv'}  }, 
+  reference = '0'
+}
+
+CD40RBDvNaive =
+{
+  transform = Group, 
+  categories = {
+  '0' = {'CD40.PanCoV - Conv', 'CD40.RBDv - Conv', 'Conv', 'Naive', 'mRNA - Conv'},
+  '1' = {'CD40.RBDv - Naive'}  }, 
+  reference = '0'
+}
+
+Conv =
+{
+  transform = Group, 
+  categories = {
+  '0' = {'CD40.PanCoV - Conv', 'CD40.RBDv - Conv', 'CD40.RBDv - Naive', 'Naive', 'mRNA - Conv'},
+  '1' = {'Conv'}  }, 
+  reference = '0'
+}
+
+
+
+[INDIVIDUAL]
+input = {betas_N_pop, fact_beta_T_pop, delta_N_pop, fact_delta_T_pop, omega_delta_N, beta_delta_N_Conv_1, P_N_pop, fact_P_T_pop, c_pop, cI_pop, k_pop, mu_pop, alpha_VLSG_pop,
+S0_pop, omega_S0, beta_S0_GroupEffect_CD40RBDv, beta_S0_GroupEffect_Conv, beta_S0_GroupEffect_CD40RBDvConv, beta_S0_GroupEffect_PanCoVConv, beta_S0_GroupEffect_mRNAConv, 
+gamma_pop, rho_pop, beta_rho_Convalescence_1, Smax_pop, tauS_pop, theta_BAb_pop, omega_theta_BAb, beta_theta_BAb_Conv_1, beta_theta_BAb_CD40RBDvNaive_1, 
+tauAb_pop, alpha_NAb_pop, eta_pop, omega_eta, beta_eta_ConvXVacc_mRNA, beta_eta_ConvXVacc_PanCov, beta_eta_ConvXVacc_CD40,
+thresh_Weight_pop, GroupEffect, ConvXVacc, Convalescence, Conv, CD40RBDvNaive}
+
+GroupEffect = {type=categorical, categories={'PanCoVConv', 'CD40RBDvConv', 'CD40RBDv', 'Conv', 'Naive', 'mRNAConv'}}
+ConvXVacc = {type=categorical, categories={'mRNA', '0', 'PanCov', 'CD40'}}
+Convalescence = {type=categorical, categories={'1', '0'}}
+Conv = {type=categorical, categories={'0', '1'}}
+CD40RBDvNaive = {type=categorical, categories={'0', '1'}}
+
+DEFINITION:
+; Viral dynamics parameters
+betas_N = {distribution=logNormal, typical=betas_N_pop, no-variability}
+fact_beta_T = {distribution=normal, typical=fact_beta_T_pop, no-variability}
+delta_N = {distribution=logNormal, typical=delta_N_pop, covariate=Conv, coefficient={0, beta_delta_N_Conv_1}, sd=omega_delta_N}
+fact_delta_T = {distribution=normal, typical=fact_delta_T_pop, no-variability}
+P_N = {distribution=logNormal, typical=P_N_pop, no-variability}
+fact_P_T = {distribution=normal, typical=fact_P_T_pop, no-variability}
+c = {distribution=logNormal, typical=c_pop, no-variability}
+cI = {distribution=logNormal, typical=cI_pop, no-variability}
+k = {distribution=logNormal, typical=k_pop, no-variability}
+mu = {distribution=logNormal, typical=mu_pop, no-variability}
+alpha_VLSG = {distribution=logNormal, typical=alpha_VLSG_pop, no-variability}
+
+; Antibody dynamics parameters
+S0 = {distribution=logNormal, typical=S0_pop, covariate=GroupEffect, coefficient={beta_S0_GroupEffect_PanCoVConv, beta_S0_GroupEffect_CD40RBDvConv, beta_S0_GroupEffect_CD40RBDv, beta_S0_GroupEffect_Conv, 0, beta_S0_GroupEffect_mRNAConv}, sd=omega_S0}
+gamma = {distribution=logNormal, typical=gamma_pop, no-variability}
+rho = {distribution=logNormal, typical=rho_pop, covariate=Convalescence, coefficient={beta_rho_Convalescence_1, 0}, no-variability}
+Smax = {distribution=logNormal, typical=Smax_pop, no-variability}
+tauS = {distribution=logNormal, typical=tauS_pop, no-variability}
+theta_BAb = {distribution=logNormal, typical=theta_BAb_pop, covariate={Conv, CD40RBDvNaive}, coefficient={{0, beta_theta_BAb_Conv_1}, {0, beta_theta_BAb_CD40RBDvNaive_1}}, sd=omega_theta_BAb}
+tauAb = {distribution=logNormal, typical=tauAb_pop, no-variability}
+alpha_NAb = {distribution=logNormal, typical=alpha_NAb_pop, no-variability}
+eta = {distribution=logNormal, typical=eta_pop, covariate=ConvXVacc, coefficient={beta_eta_ConvXVacc_mRNA, 0, beta_eta_ConvXVacc_PanCov, beta_eta_ConvXVacc_CD40}, sd=omega_eta}
+
+thresh_Weight = {distribution=logNormal, typical=thresh_Weight_pop, no-variability}
+
+
+; -------------------------------------------
+; --- Definition of the Structural model  --- 
+; -------------------------------------------
+[LONGITUDINAL]
+input = {betas_N, fact_beta_T, delta_N, fact_delta_T, P_N, fact_P_T, mu, k, c, cI, alpha_VLSG,
+S0, gamma, rho, Smax, tauS, theta_BAb, alpha_NAb, tauAb, eta,
+Inoc, Weight, thresh_Weight,
+a1, a2, a3, a4, a5, a6}
+
+
+; Regressors
+; -----------
+Inoc = {use=regressor}     ; Inoculated virions
+Weight = {use=regressor}   ; NHP weights
+; -----------
+
+
+
+EQUATION:
+odeType = stiff
+
+; Physiological quantities [Alexandre et al. Elife 2023]
+; ------------------------
+if(Weight <= thresh_Weight)
+	W_N = 4                ; volume of distribution of naso
+	W_T = 2                ; volume of distribution of trachea
+else
+	W_N = 5.5
+	W_T = 3
+end
+
+InoculumBaseline = Inoc
+; -----------
+
+
+; Decay rates
+; -----------
+deltaS = log(2)/tauS
+deltaAb = log(2)/tauAb
+; -----------
+
+
+; Initial Conditions
+; ------------------
+t0=0.01   ; We consider a slight time lag for infection as measures at t=0 were collected just before infection
+
+; Viral compartments
+ViniT_0 = 0.9*InoculumBaseline/W_T   ; in cells/ml
+ViniN_0 = 0.1*InoculumBaseline/W_N	 ; in cells/ml
+VIT_0 = 0  
+VIN_0 = 0
+VNIT_0 = 0
+VNIN_0 = 0
+
+; Target-cell compartments
+TN_0 = 1.25*10^5/W_N ; 	From Gonçalves et al. (2020) ; in cells/ml
+TT_0 = 2.25*10^4/W_T ; 	From Gonçalves et al. (2020) ; in cells/ml
+I1T_0 = 0;
+I1N_0 = 0;
+I2T_0 = 0;
+I2N_0 = 0;
+
+; Antibody compartments (assumption of steady-state)
+S_0 = min(S0,Smax)            ; Short-lived plasma cells (estimated initial conditions)  
+BAb_0 =  theta_BAb*S0/deltaAb ; 
+NAb_0 = alpha_NAb*theta_BAb*S0/deltaAb ; 
+; -----------
+
+
+
+; Dynamical Model
+; ---------------
+beta_N = betas_N*1E-5               ; Viral infectivity in naso (in absence of immune system effects)
+beta_T = beta_N*exp(fact_beta_T)    ; Viral infectivity in trachea (in absence of immune system effects)
+
+delta_T = delta_N*exp(fact_delta_T)	; Elimination of infected target-cell (in absence of immune system effects)
+
+P_T = P_N*exp(fact_P_T)             ; Production rate of virions 
+
+epsilon = eta*NAb / (1+eta*NAb)     ; Function of neutralization resulting from NAb
+
+
+; Model viral dynamics in Trachea (concentration)
+ddt_TT    = -beta_T*(1-epsilon)*TT*VIT - mu*beta_T*(1-epsilon)*TT*ViniT ; 
+ddt_I1T   = beta_T*(1-epsilon)*TT*VIT + mu*beta_T*(1-epsilon)*TT*ViniT - k*I1T ; 
+ddt_I2T   = k*I1T - delta_T*I2T ; 
+ddt_VIT   = P_T*I2T*mu - c*VIT -beta_T*(1-epsilon)*TT*VIT ; 
+ddt_VNIT  = P_T*I2T*(1-mu) - c*VNIT ;
+ddt_ViniT = -cI*ViniT - mu*beta_T*(1-epsilon)*TT*ViniT ;
+
+
+; Model viral dynamics in Nasopharynx (concentration)
+ddt_TN    = -beta_N*(1-epsilon)*TN*VIN - mu*beta_N*(1-epsilon)*TN*ViniN ; 
+ddt_I1N   = beta_N*(1-epsilon)*TN*VIN + mu*beta_N*(1-epsilon)*TN*ViniN - k*I1N ; 
+ddt_I2N   = k*I1N - delta_N*I2N ; 
+ddt_VIN   = P_N*I2N*mu - c*VIN -beta_N*(1-epsilon)*TN*VIN ;
+ddt_VNIN  = P_N*I2N*(1-mu) - c*VNIN ; 
+ddt_ViniN = -cI*ViniN - mu*beta_N*(1-epsilon)*TN*ViniN ; 
+
+V = max(VIT + VNIT + VIN + VNIN,0)
+I2 = max(I2T + I2N,0)
+
+; Model for antibody responses (concentration)
+ddt_S     = gamma*V^(1/4) + rho*(1 - S/Smax)*S - deltaS*S  ; 
+ddt_BAb   = theta_BAb*S - deltaAb*BAb ;
+ddt_NAb   = theta_BAb*alpha_NAb*S - deltaAb*NAb ;
+; ---------------
+
+
+
+; ----------------------------------------
+; --- Additional dynamics of interest  --- 
+; ----------------------------------------
+; Percent of decrease of uninfected target cells compared to the baseline (T/T0 in %)
+; --------------------------
+TN_T0_Percent = 100*TN/TN_0
+TT_T0_Percent = 100*TT/TT_0
+
+
+; Effective infectivity rate (real infectivity over time)
+; --------------------------
+Eff_beta_N = beta_N*(1-epsilon) 
+Eff_beta_T = beta_T*(1-epsilon)
+
+; Effectif reproduction number
+; ----------------------------
+Rt_N = beta_N*TN*mu*P_N/( (1+eta*NAb)*(delta_N)*(c + beta_N*TN/(1+eta*NAb) ) )   ; Effective reproduction number calculated on viral dynamics in naso (population of susceptible cells and BAb dependent on time)
+Rt_T = beta_T*TT*mu*P_T/( (1+eta*NAb)*(delta_T)*(c + beta_T*TT/(1+eta*NAb) ) )   ; Effective reproduction number calculated on viral dynamics in trachea (population of susceptible cells and BAb dependent on time)
+Rt = max(Rt_N,Rt_T)
+
+R0t_N = beta_N*TN_0*mu*P_N/( (1+eta*NAb)*(delta_N)*(c + beta_N*TN_0/(1+eta*NAb) ) )  ; Dependence of R0 in time through antibody dynamics in naso (T = T0)
+R0t_T = beta_T*TT_0*mu*P_T/( (1+eta*NAb)*(delta_T)*(c + beta_T*TT_0/(1+eta*NAb) ) )  ; Dependence of R0 in time through antibody dynamics in trachea (T = T0)
+R0t = max(R0t_N,R0t_T)
+
+; Basic reproduction number 
+R0_N = beta_N*TN_0*mu*P_N/( (1+eta*NAb_0)*(delta_N)*(c + beta_N*TN_0/(1+eta*NAb_0) ) )  ; Basic reproduction number calculated on viral dynamics in naso
+R0_T = beta_T*TT_0*mu*P_T/( (1+eta*NAb_0)*(delta_T)*(c + beta_T*TT_0/(1+eta*NAb_0) ) )  ; Basic reproduction number calculated on viral dynamics in trachea
+R0 = max(R0_N,R0_T)  ; Global basic reproduction number
+
+; Protective threshold
+NAb_Thresh_N = max(0,(beta_N*TN_0*(mu*P_N-delta_N)-delta_N*c)/(delta_N*c*eta)) ; Protective threshold calculated on viral load in naso
+NAb_Thresh_T = max(0,(beta_T*TT_0*(mu*P_T-delta_T)-delta_T*c)/(delta_T*c*eta)) ; Portective threshold calculated on viral load in trachea
+NAb_Thresh = max(NAb_Thresh_N,NAb_Thresh_T)  ; Global protective threshold
+; ---------------
+
+
+
+; Observation Model
+; ---------------
+if t<=0
+	gRNA_T  = -3
+	sgRNA_T = -3
+	gRNA_N  = -3
+	sgRNA_N = -3 
+	Obs_BAb = log10(BAb_0)
+	Obs_NAb = log10(NAb_0)
+else
+	gRNA_T  = max(log10((VIT+VNIT+ViniT)),-3)
+	sgRNA_T = max(alpha_VLSG*log10((I1T+I2T)),-3)
+	gRNA_N  = max(log10((VIN+VNIN+ViniN)),-3)
+	sgRNA_N = max(alpha_VLSG*log10((I1N+I2N)),-3)
+	Obs_BAb = max(log10(BAb),-3)
+	Obs_NAb = max(log10(NAb),-3)
+end
+; ---------------
+
+
+
+; -------------------------------------------
+; --- Definition of the  Observation model  --- 
+; -------------------------------------------
+DEFINITION: 
+y1 = {distribution=normal, prediction=gRNA_T, errorModel=constant(a1)}
+y2 = {distribution=normal, prediction=sgRNA_T, errorModel=constant(a2)}
+y3 = {distribution=normal, prediction=gRNA_N, errorModel=constant(a3)}
+y4 = {distribution=normal, prediction=sgRNA_N, errorModel=constant(a4)}
+y5 = {distribution=normal, prediction=Obs_BAb, errorModel=constant(a5)}
+y6 = {distribution=normal, prediction=Obs_NAb, errorModel=constant(a6)}

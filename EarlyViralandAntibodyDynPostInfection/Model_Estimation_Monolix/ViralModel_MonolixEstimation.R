@@ -71,7 +71,6 @@ MonolixProject <- "Final_ViralModel_NHP_DeltaInfection_MONOLIX.mlxtran"
 
 
 Observed_data <- read.table(file = paste(Project_Folder,Data_Folder,Data_file,sep="/"),header=TRUE,sep="\t",dec=".")
-# head(subset(Observed_data,DayPostExpo == 0 & obsid %in% c(2,4)))
 
 
 # --- Creation of Monolix project ----
