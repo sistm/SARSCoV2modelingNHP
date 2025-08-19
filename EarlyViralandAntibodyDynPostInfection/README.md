@@ -2,7 +2,7 @@
 # **Joint mechanistic modeling of viral and antibody responses to vaccines in NHPs**
 
 Author: Marie Alexandre  
-Date: 2025-08-13
+Date: 2025-08-19
 
 ## **Brief description of the project**
 
@@ -66,8 +66,11 @@ This folder includes:
 ### **2) Model Identifiability** (folder *Model_Identifiability_Julia*)
 
 This folder includes:
-1.  **Julia codes for identifiability analysis**. Original Julia codes (.jl files) 
 
+1.  **Julia codes for identifiability analysis**. Original Julia codes
+    (.jl files) developed to analysis the structural identifiability of
+    the joint model and results obtained (.txt files). Results were
+    obtained with Julia 1.11.3.
 
 ### **3) Model Estimation** (folder *Model_Estimation_Monolix*)
 
@@ -85,7 +88,9 @@ This folder includes:
     version of the “Viral model” and the “Joint model”. Codes have been
     initially developed for Monolix2023R1.
 
-3.  **R codes for Monolix results analysis**. Original R codes developed
-    to generate/analysis and visualize model results after Monolix
-    estimation.
+3.  **Final Monolix Projects**. Final version of Monolix Projects
+    selected to describe our data and ready for publication.
 
+4.  **R codes and mlxtran codes for Monolix results analysis**. Original
+    R code developed to generate/analysis and visualize model results
+    after Monolix estimation.

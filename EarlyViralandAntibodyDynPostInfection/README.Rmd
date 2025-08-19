@@ -45,7 +45,8 @@ This folder includes:
 ### **2) Model Identifiability** (folder *Model_Identifiability_Julia*)
 
 This folder includes:
-1.  **Julia codes for identifiability analysis**. Original Julia code (.jl files) developed to analysis the structural identifiability of the joint model and results obtained (.txt file). Results were obtained with Julia 1.11.3.
+
+1.  **Julia codes for identifiability analysis**. Original Julia codes (.jl files) developed to analysis the structural identifiability of the joint model and results obtained (.txt files). Results were obtained with Julia 1.11.3.
 
 
 ### **3) Model Estimation** (folder *Model_Estimation_Monolix*)
