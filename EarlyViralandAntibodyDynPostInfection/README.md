@@ -2,7 +2,7 @@
 # **Joint mechanistic modeling of viral and antibody responses to vaccines in NHPs**
 
 Author: Marie Alexandre  
-Date: 2025-08-12
+Date: 2025-08-13
 
 ## **Brief description of the project**
 
@@ -52,8 +52,33 @@ modeling work currently under submission for publication.
 
 ### **1) Simulated data** (folder *Simulated_data*)
 
-In this folder, we provide datasets that has been simulated directly
-from our original dataset and used in the other files of the project to
-help users to understand our codes. It’s therefore noted that results
-obtained here can be slightly different from those obtained with the
-original dataset.
+This folder includes:
+
+1.  **A dataset of simulated data**. This dataset has been directly
+    simulated from our original dataset and used in the other files of
+    the project to help users to understand our codes. It’s therefore
+    noted that results obtained here can be slightly different from
+    those obtained with the original dataset.  
+2.  **R code for descriptive analysis of observed data**. Original R
+    code developed to perform descriptive analysis of viral and antibody
+    dynamics (separately) and generate figures for publication.
+
+### **2) Model Estimation** (folder *Model_Estimation_Monolix*)
+
+This folder includes:
+
+1.  **Mlxtran codes for Monolix projects**. Original mlxtran codes (.txt
+    files) of the two mechanistic models used to model our observed
+    data: (1) the “Viral model” describing only viral dynamics, without
+    including antibody responses, (2) the overall model jointly
+    describing viral and antibody responses, and their mutual
+    interactions.
+
+2.  **R codes for Monolix Estimation of mechanistic models**. Original R
+    codes developed to create and estimate Monolix projects of the final
+    version of the “Viral model” and the “Joint model”. Codes have been
+    initially developed for Monolix2023R1.
+
+3.  **R codes for Monolix results analysis**. Original R codes developed
+    to generate/analysis and visualize model results after Monolix
+    estimation.

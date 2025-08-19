@@ -356,7 +356,7 @@ display: none;
 <h1><strong>Joint mechanistic modeling of viral and antibody responses
 to vaccines in NHPs</strong></h1>
 <p>Author: Marie Alexandre<br />
-Date: 2025-08-12</p>
+Date: 2025-08-13</p>
 <div id="brief-description-of-the-project" class="section level2">
 <h2><strong>Brief description of the project</strong></h2>
 <p><strong>Objective:</strong> The modeling work presented in this
@@ -406,11 +406,40 @@ this modeling work currently under submission for publication.</p>
 <div id="simulated-data-folder-simulated_data" class="section level3">
 <h3><strong>1) Simulated data</strong> (folder
 <em>Simulated_data</em>)</h3>
-<p>In this folder, we provide datasets that has been simulated directly
-from our original dataset and used in the other files of the project to
-help users to understand our codes. It’s therefore noted that results
-obtained here can be slightly different from those obtained with the
-original dataset.</p>
+<p>This folder includes:</p>
+<ol style="list-style-type: decimal">
+<li><strong>A dataset of simulated data</strong>. This dataset has been
+directly simulated from our original dataset and used in the other files
+of the project to help users to understand our codes. It’s therefore
+noted that results obtained here can be slightly different from those
+obtained with the original dataset.<br />
+</li>
+<li><strong>R code for descriptive analysis of observed data</strong>.
+Original R code developed to perform descriptive analysis of viral and
+antibody dynamics (separately) and generate figures for
+publication.</li>
+</ol>
+</div>
+<div id="model-estimation-folder-model_estimation_monolix" class="section level3">
+<h3><strong>2) Model Estimation</strong> (folder
+<em>Model_Estimation_Monolix</em>)</h3>
+<p>This folder includes:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Mlxtran codes for Monolix projects</strong>. Original
+mlxtran codes (.txt files) of the two mechanistic models used to model
+our observed data: (1) the “Viral model” describing only viral dynamics,
+without including antibody responses, (2) the overall model jointly
+describing viral and antibody responses, and their mutual
+interactions.</p></li>
+<li><p><strong>R codes for Monolix Estimation of mechanistic
+models</strong>. Original R codes developed to create and estimate
+Monolix projects of the final version of the “Viral model” and the
+“Joint model”. Codes have been initially developed for
+Monolix2023R1.</p></li>
+<li><p><strong>R codes for Monolix results analysis</strong>. Original R
+code developed to generate/analysis and visualize model results after
+Monolix estimation.</p></li>
+</ol>
 </div>
 </div>
 </div>
