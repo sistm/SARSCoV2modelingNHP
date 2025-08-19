@@ -61,6 +61,14 @@ This folder includes:
 4. **R codes and mlxtran codes for Monolix results analysis**. Original R code developed to generate/analysis and visualize model results after Monolix estimation.
 
 
+### **4) Counterfactual scenarios simulation** (folder *Counterfactual_Scenario_Simulx*)
+This folder includes:
+
+1. **Mlxtran codes for simulx simulation**. Original codes (txt files) used by Simulx to simulate Joint model dynamics according to counterfactual statements. 
+
+2. **R code for counterfactual simulations**. Original R code developed to run counterfactual statements using Simulx and visualize results. 
+
+
 
 
 
