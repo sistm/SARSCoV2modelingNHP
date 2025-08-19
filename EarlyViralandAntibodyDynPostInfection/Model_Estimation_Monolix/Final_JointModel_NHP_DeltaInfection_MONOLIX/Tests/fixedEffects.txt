@@ -1,0 +1,12 @@
+parameter,statistics(sa),p-value(sa)
+beta_delta_N_Conv_1,3.27443,0.00106
+beta_S0_GroupEffect_CD40RBDv,2.74339,0.00608
+beta_S0_GroupEffect_CD40RBDvConv,9.77754,<2.2e-16
+beta_S0_GroupEffect_mRNAConv,11.4106,<2.2e-16
+beta_S0_GroupEffect_PanCoVConv,9.17252,<2.2e-16
+beta_rho_Convalescence_1,5.59516e-07,1
+beta_theta_BAb_CD40RBDvNaive_1,3.90372,9.47e-05
+beta_theta_BAb_Conv_1,5.72388,1.04e-08
+beta_eta_ConvXVacc_CD40,2.79376,0.00521
+beta_eta_ConvXVacc_PanCov,4.11165,3.93e-05
+beta_eta_ConvXVacc_mRNA,4.71231,2.45e-06

@@ -1,0 +1,7 @@
+eta1,eta2,coeff,statistics,p-value
+eta_delta_N,eta_S0,0,-2.01919,0.0516511
+eta_delta_N,eta_theta_BAb,0,-0.0382782,0.969696
+eta_delta_N,eta_eta,0,0.348885,0.729392
+eta_S0,eta_theta_BAb,0,-1.25874,0.216956
+eta_S0,eta_eta,0,0.417922,0.678711
+eta_theta_BAb,eta_eta,0,0.292911,0.771424

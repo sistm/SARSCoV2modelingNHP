@@ -1,0 +1,168 @@
+DESCRIPTION: Viral/Humoral NHP model
+
+Model describing early viral dynamics and antibody response in NHP following SARS-CoV-2 infection.
+
+
+
+Model of viral loads [Alexandre et al., Elife 2023]:
+--------------------
+ - Target-cell limited model with inoculum 
+ - Genomic and subgenomic viral loads
+ - Viral dynamics in both Trachea and Nasopharynx
+ - The volume of distribution of Trachea and Nasopharynx defined by animal weights
+ 
+Model of antibody dynamics [inspired by Clairon et al., Plos Comp Bio 2023]: 
+--------------------------
+ - anti-RBD binding antibodies (BAb) and antibodies neutralizing ACE2/RBD binding (NAb)
+ - BAb produced by plasma cells after detection of viruses
+ - Concentration of NAb assumed to be proportional to BAb
+ - Addition of saturation effect to plasma cells dynamics (logistic function)
+
+Effects of antibodies on viral replication:
+-------------------------------------------
+ - NAb decrease viral infectivity
+
+Model built to: 
+---------------
+ - Describe post-infection viral and antibody dynamics
+ - Consider a single infection
+ - Include antibody response specific to a single variant
+ 
+
+ 
+ 
+[LONGITUDINAL]
+input = {
+; Parameters describing viral dynamics
+betas_N,fact_beta_T,delta_N,fact_delta_T,P_N,fact_P_T,mu,k,c,cI,alpha_VLSG,
+
+; Parameters describing antibody dynamics
+S0,gamma,rho,Smax,tauS,theta_BAb,alpha_NAb,tauAb,eta,
+
+; Additional parameters and/or regressors
+Inoc,Weight,thresh_Weight}
+
+
+; Regressors
+; -----------
+Inoc = {use=regressor}     ; Inoculated virions
+Weight = {use=regressor}   ; NHP weights
+; -----------
+
+
+
+EQUATION:
+odeType = stiff
+
+; Physiological quantities [Alexandre et al. Elife 2023]
+; ------------------------
+if(Weight <= thresh_Weight)
+	W_N = 4                ; volume of distribution of naso
+	W_T = 2                ; volume of distribution of trachea
+else
+	W_N = 5.5
+	W_T = 3
+end
+
+InoculumBaseline = Inoc  ; in virions/mL
+; -----------
+
+
+; Decay rates
+; -----------
+deltaS = log(2)/tauS
+deltaAb = log(2)/tauAb
+; -----------
+
+
+; Initial Conditions
+; ------------------
+t0=0.01   ; We consider a slight time lag for infection as measures at t=0 were collected just before infection
+
+; Viral compartments
+ViniT_0 = 0.9*InoculumBaseline/W_T   ; in cells/ml
+ViniN_0 = 0.1*InoculumBaseline/W_N	 ; in cells/ml
+VIT_0 = 0  
+VIN_0 = 0
+VNIT_0 = 0
+VNIN_0 = 0
+
+; Target-cell compartments
+TN_0 = 1.25*10^5/W_N ; 	From Gonçalves et al. (2020) ; in cells/ml
+TT_0 = 2.25*10^4/W_T ; 	From Gonçalves et al. (2020) ; in cells/ml
+I1T_0 = 0;
+I1N_0 = 0;
+I2T_0 = 0;
+I2N_0 = 0;
+
+; Antibody compartments (assumption of steady-state)
+S_0 = min(S0,Smax)					   ; Short-lived plasma cells (estimated initial conditions)  
+BAb_0 = theta_BAb*S0/deltaAb ; 
+NAb_0 = alpha_NAb*theta_BAb*S0/deltaAb ; 
+; -----------
+
+
+
+; Dynamical Model
+; ---------------
+beta_N = betas_N*1E-5               ; Viral infectivity in naso (in absence of immune system effects)
+beta_T = beta_N*exp(fact_beta_T)    ; Viral infectivity in trachea (in absence of immune system effects)
+
+delta_T = delta_N*exp(fact_delta_T)	; Elimination of infected target-cell (in absence of immune system effects)
+
+P_T = P_N*exp(fact_P_T)             ; Production rate of virions 
+
+epsilon = eta*NAb / (1+eta*NAb)     ; Function of neutralization resulting from NAb
+
+
+; Model viral dynamics in Trachea (concentration)
+ddt_TT    = -beta_T*(1-epsilon)*TT*VIT - mu*beta_T*(1-epsilon)*TT*ViniT ; 
+ddt_I1T   = beta_T*(1-epsilon)*TT*VIT + mu*beta_T*(1-epsilon)*TT*ViniT - k*I1T ; 
+ddt_I2T   = k*I1T - delta_T*I2T  ; 
+ddt_VIT   = P_T*I2T*mu - c*VIT -beta_T*(1-epsilon)*TT*VIT ; 
+ddt_VNIT  = P_T*I2T*(1-mu) - c*VNIT ;
+ddt_ViniT = -cI*ViniT - mu*beta_T*(1-epsilon)*TT*ViniT ;
+
+
+; Model viral dynamics in Nasopharynx (concentration)
+ddt_TN    = -beta_N*(1-epsilon)*TN*VIN - mu*beta_N*(1-epsilon)*TN*ViniN ; 
+ddt_I1N   = beta_N*(1-epsilon)*TN*VIN + mu*beta_N*(1-epsilon)*TN*ViniN - k*I1N ; 
+ddt_I2N   = k*I1N - delta_N*I2N  ; 
+ddt_VIN   = P_N*I2N*mu - c*VIN -beta_N*(1-epsilon)*TN*VIN ;
+ddt_VNIN  = P_N*I2N*(1-mu) - c*VNIN ; 
+ddt_ViniN = -cI*ViniN - mu*beta_N*(1-epsilon)*TN*ViniN ; 
+
+V = max(VIT + VNIT + VIN + VNIN,0)
+I2 = max(I2T + I2N,0)
+
+; Model for antibody responses (concentration)
+ddt_S     = gamma*V^(1/4) + rho*(1 - S/Smax)*S - deltaS*S  ; 
+ddt_BAb   = theta_BAb*S - deltaAb*BAb ;
+ddt_NAb   = theta_BAb*alpha_NAb*S - deltaAb*NAb ;
+; ---------------
+
+
+
+; Observation Model
+; ---------------
+if t<=0
+	gRNA_T  = -3
+	sgRNA_T = -3
+	gRNA_N  = -3
+	sgRNA_N = -3 
+	Obs_BAb = log10(BAb_0)
+	Obs_NAb = log10(NAb_0)
+else
+	gRNA_T  = max(log10((VIT+VNIT+ViniT)),-3)
+	sgRNA_T = max(alpha_VLSG*log10((I1T+I2T)),-3)
+	gRNA_N  = max(log10((VIN+VNIN+ViniN)),-3)
+	sgRNA_N = max(alpha_VLSG*log10((I1N+I2N)),-3)
+	Obs_BAb = max(log10(BAb),-3)
+	Obs_NAb = max(log10(NAb),-3)
+end
+; ---------------
+
+
+OUTPUT:
+output = {gRNA_T,sgRNA_T,gRNA_N,sgRNA_N,Obs_BAb,Obs_NAb}
+table = {epsilon,S,BAb,NAb}

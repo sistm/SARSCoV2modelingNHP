@@ -1,0 +1,5 @@
+parameter,statistics,p-value,test
+delta_N,0.101511,0.254818,Kolmogorov-Smirnov
+S0,0.326042,7.2502e-11,Kolmogorov-Smirnov
+theta_BAb,0.0854075,0.660268,Kolmogorov-Smirnov
+eta,0.353145,2.22045e-15,Kolmogorov-Smirnov

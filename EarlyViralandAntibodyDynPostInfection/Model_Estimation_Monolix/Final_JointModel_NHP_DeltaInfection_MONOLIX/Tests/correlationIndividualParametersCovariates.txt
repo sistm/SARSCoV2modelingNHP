@@ -1,0 +1,12 @@
+parameter,covariate,statistics,p-value,test
+delta_N,beta_delta_N_Conv_1,6.92874,7.60404e-08,t-Test
+S0,beta_S0_GroupEffect_CD40RBDv,9.93363,1.11466e-10,t-Test
+S0,beta_S0_GroupEffect_Conv,-0.310153,0.758741,t-Test
+S0,beta_S0_GroupEffect_CD40RBDvConv,27.9314,<2.2e-16,t-Test
+S0,beta_S0_GroupEffect_mRNAConv,33.4621,<2.2e-16,t-Test
+S0,beta_S0_GroupEffect_PanCoVConv,28.6429,<2.2e-16,t-Test
+theta_BAb,beta_theta_BAb_CD40RBDvNaive_1,7.51709,1.79984e-08,t-Test
+theta_BAb,beta_theta_BAb_Conv_1,10.9643,3.40048e-12,t-Test
+eta,beta_eta_ConvXVacc_CD40,4.55357,8.19173e-05,t-Test
+eta,beta_eta_ConvXVacc_PanCov,7.01276,8.56883e-08,t-Test
+eta,beta_eta_ConvXVacc_mRNA,9.13033,3.64332e-10,t-Test
