@@ -1,0 +1,40 @@
+---
+# title: "#**Description of the dataset**\n"
+# author: "Marie Alexandre"
+# date: "`r Sys.Date()`"
+output:
+  md_document:
+    variant: markdown_github
+---
+
+
+
+# **Description of the dataset **
+Author: Marie Alexandre  
+Date: `r Sys.Date()`
+
+
+These files have been written considering datasets uploaded on Monolix for the model parameter estimation and are structured as follows: 
+
+```{r,echo=FALSE}
+library(knitr)
+table <- rbind(
+  data.frame(`Column Name` = "AnimalID", Type = "character", Description = "Unique ID of NHPs included in the preclinical trial", `Model Type` = "Column used for all models"),
+  data.frame(`Column Name` = "Time", Type = "integer", Description = "Time in days since the exposure to Wuhan SARS-CoV-2", `Model Type` = "Column used for all models"), 
+  data.frame(`Column Name` = "log10VL", Type = "numeric", Description = "Viral load measurement collected in log10 scale (log10 cp/mL)", `Model Type` = "Column used for all models"),
+  data.frame(`Column Name` = "obs", Type = "integer", Description = "Categorical variable added for Monolix and defining at each row the type of data observed: `1` for gRNA viral load in Trachea, `2` for sgRNA viral load in Trachea, `3` for gRNA viral load in Nasopharynx, `4` for sgRNA viral load in Nasopharynx.", `Model Type` = "Column used for all models"),
+  data.frame(`Column Name` = "Group", Type = "character", Description = "Categorical variable defining the immunological group to which NHP belongs at the time of exposure (Wuhan infection). Three group categories are possible here: (1) `Naive` - NHPs free of any previous immunization, (2) `Convalescent` - NHPs have been previoulsy infected by Wuhan SARS-CoV-2, (3) `Conv-CD40` - NHPs have been previously infected by Wuhan SARS-CoV-2 and then received CD40.RBD vaccine.", `Model Type` = "Column used for all models"),
+  data.frame(`Column Name` = "Type", Type = "character", Description = "Categorical variable defining the type of data is observed: (1) `Total` for genomic viral load, (2) `sg` for subgenomic viral load", `Model Type` = "Column used for all models"),
+  data.frame(`Column Name` = "organ", Type = "character", Description = "Categorical variable defining in which URT compartment measurements have been performed: (1) `Trachea` for viral loads collected in the trachea, (2) `Naso` for viral loads collected in the nasopharynx.", `Model Type` = "Column used for all models"),
+  data.frame(`Column Name` = "Weight", Type = "numeric", Description = "Weight of NHPs, in Kgs, used as regressor in Monolix", `Model Type` = "Column used for all models"),
+  data.frame(`Column Name` = "censored", Type = "binary", Description = "Binary variable defining whether the observation is left-censored (`1`) or not (`0`). Limits of detection are fixed at 476 and 749 cp/mL for genomic and subgenomic viral loads, respectively.", `Model Type` = "Column used for all models"),
+  
+  data.frame(`Column Name` = "Marker", Type = "numeric", Description = "Baseline value of the marker (ECL here) in natural scale, used as regressor in Monolix",`Model Type` = "Column used only for model adjusted for baseline covariates."),
+  
+  data.frame(`Column Name` = "MARKER.Slope", Type = "numeric", Description = "One column for each potential marker used as covariate providing the `value of Slopes` of the immune marker (e.g. ECL) calculated and used to perform linear interpolation in Monolix to obtain continous dynamics of the covariate(s). Column(s) used as regressors in Monolix.",`Model Type` = "Column(s) used only for model adjusted for for time-varying covariates."),
+  
+  data.frame(`Column Name` = "MARKER.Intercept", Type = "numeric", Description = "One column for each potential marker used as covariate providing the `value of intercepts` of the immune marker (e.g. ECL) calculated and used to perform linear interpolation in Monolix to obtain continous dynamics of the covariate(s). Column(s) used as regressors in Monolix.",`Model Type` = "Column(s) used only for model adjusted for for time-varying covariates."))
+
+
+kable(table, caption = NULL)
+```
