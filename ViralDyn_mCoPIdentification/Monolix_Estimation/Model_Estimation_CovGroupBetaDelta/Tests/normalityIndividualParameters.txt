@@ -1,0 +1,3 @@
+parameter,statistics,p-value,test
+beta_N_pow,0.106912,0.0843532,Kolmogorov-Smirnov
+delta_N,0.156435,0.00261871,Kolmogorov-Smirnov

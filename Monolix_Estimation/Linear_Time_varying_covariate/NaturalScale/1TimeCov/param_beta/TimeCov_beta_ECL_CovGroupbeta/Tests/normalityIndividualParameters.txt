@@ -1,3 +1,0 @@
-parameter,statistics,p-value,test
-beta_N_pow,0.116424,0.0329771,Kolmogorov-Smirnov
-delta_N,0.964173,0.999164,Shapiro-Wilk

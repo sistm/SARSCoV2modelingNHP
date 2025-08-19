@@ -1,3 +1,0 @@
-parameter,statistics,p-value,test
-beta_N_pow,0.931184,0.182738,Shapiro-Wilk
-delta_N,0.960213,0.953112,Shapiro-Wilk

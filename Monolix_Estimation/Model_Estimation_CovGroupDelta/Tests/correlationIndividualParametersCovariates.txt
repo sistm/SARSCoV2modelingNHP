@@ -1,2 +1,0 @@
-parameter,covariate,statistics,p-value,test
-delta_N,groupVsnaive,1546.74,<2.2e-16,Fisher

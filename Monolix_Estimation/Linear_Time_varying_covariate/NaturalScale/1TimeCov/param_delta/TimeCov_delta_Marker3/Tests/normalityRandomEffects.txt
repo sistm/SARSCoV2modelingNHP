@@ -1,3 +1,0 @@
-eta,statistics,p-value
-eta_beta_N_pow,0.932581,0.233171
-eta_delta_N,0.955653,0.708872

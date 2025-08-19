@@ -1,3 +1,0 @@
-parameter,statistics(sa),p-value(sa)
-beta_beta_N_pow_groupVsnaive_G_conv,6.20207,5.57e-10
-beta_beta_N_pow_groupVsnaive_G_convCD40,9.61339,<2.2e-16

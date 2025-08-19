@@ -1,0 +1,103 @@
+<DATAFILE>
+
+[FILEINFO]
+file = '../../Simulated_data_ViralLoad_ImmunoMarkers_NaturalScale_Step2.txt'
+delimiter = semicolon
+header = {AnimalID, Time, log10VL, obs, Group, type, organ, Weight, censored, ECL_Slope_beta, ECL_Intercept_beta, ECL_Slope, ECL_Intercept, Marker2_Slope, Marker2_Intercept, Marker3_Slope, Marker3_Intercept}
+
+[CONTENT]
+AnimalID = {use=identifier}
+Time = {use=time}
+log10VL = {use=observation, name={y_1, y_2, y_3, y_4}, yname={'1', '2', '3', '4'}, type={continuous, continuous, continuous, continuous}}
+obs = {use=observationtype}
+Group = {use=covariate, type=categorical}
+Weight = {use=regressor}
+censored = {use=censored}
+ECL_Slope_beta = {use=regressor}
+ECL_Intercept_beta = {use=regressor}
+Marker3_Slope = {use=regressor}
+Marker3_Intercept = {use=regressor}
+
+<MODEL>
+
+[INDIVIDUAL]
+input = {P_N_pop, alpha_VLSG_pop, beta_N_pow_pop, omega_beta_N_pow, beta_immuno1_pop, beta_immuno2_pop, c_pop, cI_pop, delta_N_pop, omega_delta_N, fact_P_T_pop, fact_beta_T_pop, fact_delta_T_pop, g_pop, k_pop, mu_pop, thresh_Weight_pop}
+
+DEFINITION:
+P_N = {distribution=logNormal, typical=P_N_pop, no-variability}
+alpha_VLSG = {distribution=logNormal, typical=alpha_VLSG_pop, no-variability}
+beta_N_pow = {distribution=normal, typical=beta_N_pow_pop, sd=omega_beta_N_pow}
+beta_immuno1 = {distribution=normal, typical=beta_immuno1_pop, no-variability}
+beta_immuno2 = {distribution=normal, typical=beta_immuno2_pop, no-variability}
+c = {distribution=logNormal, typical=c_pop, no-variability}
+cI = {distribution=logNormal, typical=cI_pop, no-variability}
+delta_N = {distribution=logNormal, typical=delta_N_pop, sd=omega_delta_N}
+fact_P_T = {distribution=normal, typical=fact_P_T_pop, no-variability}
+fact_beta_T = {distribution=normal, typical=fact_beta_T_pop, no-variability}
+fact_delta_T = {distribution=normal, typical=fact_delta_T_pop, no-variability}
+g = {distribution=normal, typical=g_pop, no-variability}
+k = {distribution=logNormal, typical=k_pop, no-variability}
+mu = {distribution=logNormal, typical=mu_pop, no-variability}
+thresh_Weight = {distribution=logNormal, typical=thresh_Weight_pop, no-variability}
+
+[LONGITUDINAL]
+input = {a1, a2, a3, a4}
+
+file = '../../../../../Mlxtran_Models/MlxtranCode_MechanisticModel_SARSCoV2_VL_2TimeVaryingCovBeta.txt'
+
+DEFINITION:
+y1 = {distribution=normal, prediction=VLTrachea, errorModel=constant(a1)}
+y2 = {distribution=normal, prediction=VLSGTrachea, errorModel=constant(a2)}
+y3 = {distribution=normal, prediction=VLNaso, errorModel=constant(a3)}
+y4 = {distribution=normal, prediction=VLSGNaso, errorModel=constant(a4)}
+
+<FIT>
+data = {y_1, y_2, y_3, y_4}
+model = {y1, y2, y3, y4}
+
+<PARAMETER>
+P_N_pop = {value=40000, method=MLE}
+a1 = {value=1, method=MLE}
+a2 = {value=1, method=MLE}
+a3 = {value=1, method=MLE}
+a4 = {value=1, method=MLE}
+alpha_VLSG_pop = {value=1, method=MLE}
+beta_N_pow_pop = {value=-7, method=MLE}
+beta_immuno1_pop = {value=0, method=MLE}
+beta_immuno2_pop = {value=0, method=MLE}
+cI_pop = {value=20, method=FIXED}
+c_pop = {value=3, method=FIXED}
+delta_N_pop = {value=1.24154, method=MLE}
+fact_P_T_pop = {value=0, method=MLE}
+fact_beta_T_pop = {value=0, method=FIXED}
+fact_delta_T_pop = {value=0, method=FIXED}
+g_pop = {value=0, method=FIXED}
+k_pop = {value=3, method=FIXED}
+mu_pop = {value=0.001, method=FIXED}
+omega_beta_N_pow = {value=1, method=MLE}
+omega_delta_N = {value=1, method=MLE}
+thresh_Weight_pop = {value=4.5, method=FIXED}
+
+<MONOLIX>
+
+[TASKS]
+populationParameters()
+individualParameters(method = {conditionalMean, conditionalMode })
+fim(method = StochasticApproximation)
+logLikelihood(method = ImportanceSampling)
+plotResult(method = {outputplot, indfits, obspred, residualsscatter, residualsdistribution, parameterdistribution, covariatemodeldiagnosis, randomeffects, covariancemodeldiagnosis, saemresults })
+
+[SETTINGS]
+GLOBAL:
+exportpath = 'TimeCov_beta_Marker3'
+
+POPULATION:
+exploratoryautostop = no
+smoothingautostop = no
+exploratoryiterations = 800
+simulatedannealingiterations = 800
+
+FIM:
+miniterations = 100
+maxiterations = 5000
+
