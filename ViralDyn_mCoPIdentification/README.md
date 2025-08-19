@@ -1,30 +1,82 @@
-\#**Mechanistic modeling of viral dynamics & identification of mCoP in
-NHPs**
-
-================
-Marie Alexandre
-2025-08-07
 
 # **Mechanistic modeling of viral dynamics & identification of mCoP in NHPs**
 
 Author: Marie Alexandre  
-Date: 2025-08-07
+Date: 2021-11-24
 
 ## **Objectives of the project**
 
 The code provided in this folder is an original code developed in the
 modeling work published by (Alexandre et al. 2022).
 
-This work aimed at :
+**Objective:** The modeling work presented in this project is an
+original work whose purpose is to develop a mechanistic model describing
+*viral* dynamics in non-human primates (NHPs) in order to identify and
+quantify the main mechanisms involved in vaccine- and natural-induced
+immunity following SARS-CoV-2 infection. Additionally, we developed a
+data mining approach of immunological markers to identify robust
+mechanistic correlate of protection (mCoP).
 
-**(1)** Modeling viral dynamics (genomic and subgenomic) collected in
-Non-Human Primates after Wuhan SARS-CoV-2 infection using a mechanistic
-modeling to understand and evaluate the immune mechanisms involved in
-the vaccine response.
+**Data:** The mechanistic model was estimated on viral dynamics, both
+genomic and subgenomic viral RNA, collected longitudinally in naive,
+convalescent, and convalescent-vaccinated animals involved in a
+preclinical study evaluating the efficacy of a SARS-CoV-2 protein-based
+vaccine targeting CD40-presenting cells developed by the French Vaccine
+Research Institute (VRI). We focused our modeling in the early phase
+following the Wuhan SARS-CoV-2 infection, with data collected regularly
+up to 30 days post-infection. For each animal, the following data were
+collected: 1) viral genomic RNA (gRNA) and 2) subgenomic RNA (sgRNA)
+quantified in nasopharyngeal and tracheal swabs by RT-qPCR, 2) many
+cytokines, 3) CD40+ and CD8+ Tcells quantified by ICS, 4) IFNg measured
+by ELISpot assay, 5) anti-spike and anti-RBD binding antibodies
+quantified by Luminex, MSD immunoassay and ELISA assay, and 6) Efficacy
+of antibody to inhibition binding of the RBD domain to the ACE2 receptor
+using the MSD pseudo-neutralization assay.  
+Data used in this modeling have been published in (Marlin et al. 2021).
 
-**(2)** Identifying the vaccine-induced immune mechanisms of action and
-mechanistic correlate of protection (mCoP), i.e. immune markers
-capturing these effects.
+**Method:** We *first* developed an original mechanistic model based on
+ordinary differential equations describing viral dynamics following
+viral infection which integrates dynamics of inoculated virions.
+*Second*, we estimated the model on NHPs data using SAEM algorithm
+implemented in Monolix software, and identified Vaccine- and previous
+infection-induced immunity/protection mechanisms impacting viral
+dynamics by adjusting model parameters for animal immunological
+background. *Finally*, we proposed an original data mining approach to
+identify the immunological markers associated with these immune
+mechanisms, and validate these markers as relevant mCoP.
+
+## **Description of folders**
+
+### **1) Simulated data** (folder *Simulated_data*)
+
+This folder includes twelve **datasets of simulated data**. These
+datasets have been directly simulated from our original datasets to
+reproduce our results. In particular, we included in these dataset
+simulation of dynamics of the immune marker (labeled ECLRBD) which has
+been identified as relevant mCoP in our analysis and we added simulation
+of “fack” immune markers, simulated as white noise.
+
+### **2) R and Mlxtran codes** (folder *Rcode*)
+
+This folder includes:
+
+1.  **R code for data simulation**. Code developed to generate simulated
+    datasets included in the project (see folder *Simulated data*).
+
+2.  **R code for Monolix Estimation of the mechanistic model**. Original
+    Code developed to create and estimate Monolix project describing
+    viral dynamics. Codes have been initially developed for
+    Monolix2019R1 version.
+
+3.  **R codes for covariate selection**. original codes developed to
+    perform our covariate selection when time-varying covariates are
+    considered (code for model estimation and code to define model
+    features).
+
+4.  **Mlxtran code for simulation**. Original mlxtran code (.txt file)
+    of the mechanistic model used to simulate viral dynamics once model
+    parameters fixed (either after model estimation of by choosing
+    parameters’ values).
 
 ## **Bibliography**
 
@@ -35,6 +87,15 @@ capturing these effects.
 Alexandre M, Marlin R, Prague M, Coleon S, Kahlaoui N, Cardinaud S, et
 al. Modelling the response to vaccine in non-human primates to define
 SARS-CoV-2 mechanistic correlates of protection. elife. 2022;11:e75427.
+
+</div>
+
+<div id="ref-marlin2021targeting" class="csl-entry">
+
+Marlin R, Godot V, Cardinaud S, Galhaut M, Coleon S, Zurawski S, et al.
+Targeting SARS-CoV-2 receptor-binding domain to cells expressing CD40
+improves protection to infection in convalescent macaques. Nature
+communications. 2021;12(1):5215.
 
 </div>
 
