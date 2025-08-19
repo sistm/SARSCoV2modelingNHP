@@ -42,7 +42,13 @@ This folder includes:
  2. **R code for descriptive analysis of observed data**. Original R code developed to perform descriptive analysis of viral and antibody dynamics (separately) and generate figures for publication.
  
 
-### **2) Model Estimation** (folder *Model_Estimation_Monolix*)
+### **2) Model Identifiability** (folder *Model_Identifiability_Julia*)
+
+This folder includes:
+1.  **Julia codes for identifiability analysis**. Original Julia code (.jl files) developed to analysis the structural identifiability of the joint model and results obtained (.txt file). Results were obtained with Julia 1.11.3.
+
+
+### **3) Model Estimation** (folder *Model_Estimation_Monolix*)
 This folder includes: 
 
 1. **Mlxtran codes for Monolix projects**. Original mlxtran codes (.txt files) of the two mechanistic models used to model our observed data: (1) the "Viral model" describing only viral dynamics, without including antibody responses, (2) the overall model jointly describing viral and antibody responses, and their mutual interactions.

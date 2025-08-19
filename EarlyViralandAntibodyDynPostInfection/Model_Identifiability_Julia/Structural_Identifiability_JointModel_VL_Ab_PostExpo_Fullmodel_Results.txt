@@ -1,0 +1,55 @@
+-----------------------------------------
+-- Presentation of the model --
+-----------------------------------------
+x1 = TN:     Uninfected target cells - in nasopharynx
+x2 = I1N:    Unproductively infected target cells - in nasopharynx
+x3 = I2N:    Productively infected target cells - in nasopharynx
+x4 = VIN:    Infectious viruses  - in nasopharynx
+x5 = VNIN:   Non-infectious viruses - in nasopharynx
+x6 = ViniN:  Inoculated viruses - in nasopharynx
+
+x7 = TT:     Uninfected target cells - in trachea
+x8 = I1T:    Unproductively infected target cells - in trachea 
+x9 = I2T:    Productively infected target cells - in trachea
+x10 = VIT:    Infectious viruses - in trachea 
+x11 = VNIT:   Non-infectious viruses - in trachea
+x12 = ViniT:  Inoculated viruses - in trachea
+
+x13 = S:     SL ASCs 
+x14 = BAb:   Binding antibodies
+x15 = NAb :  Neutralizing antibodies 
+y1 = gRNAN:    genomic viral load - in nasopharynx
+y2 = sgRNAN:   subgenomic viral load - in nasopharynx
+y3 = gRNAT:    genomic viral load - in trachea
+y4 = sgRNAT:   subgenomic viral load - in trachea
+y3 = Obs_BAb:   binding antibodies 
+y4 = Obs_NAb:   neutralizing antibodies 
+
+-----------------------------------------
+-- Study of the local identifiability --
+-----------------------------------------
+x1(t) -> true
+x2(t) -> true
+x3(t) -> true
+x4(t) -> true
+x5(t) -> true
+x6(t) -> true
+x7(t) -> true
+x8(t) -> true
+x9(t) -> true
+x10(t) -> true
+x11(t) -> true
+x12(t) -> true
+x13(t) -> true
+x14(t) -> true
+x15(t) -> true
+PN -> true
+PT -> true
+Smax -> true
+alpha_NAb -> true
+alpha_VLSG -> true
+beta -> true
+delta -> true
+eta -> true
+rho -> true
+theta -> true

@@ -1,0 +1,83 @@
+-----------------------------------------
+-- Presentation of the model --
+-----------------------------------------
+x1 = T:     Uninfected target cells 
+x2 = I1:    Unproductively infected target cells  
+x3 = I2:    Productively infected target cells
+x4 = VI:    Infectious viruses  
+x5 = VNI:   Non-infectious viruses
+x6 = Vini:  Inoculated viruses 
+
+x7 = S:     SL ASCs 
+x8 = BAb:   Binding antibodies
+x9 = NAb :  Neutralizing antibodies 
+y1 = gRNA:    genomic viral load 
+y2 = sgRNA:   subgenomic viral load 
+y3 = Obs_BAb:   binding antibodies 
+y4 = Obs_NAb:   neutralizing antibodies 
+
+-----------------------------------------
+-- Study of the global identifiability --
+-----------------------------------------
+x1(t) -> globally
+x2(t) -> globally
+x3(t) -> globally
+x4(t) -> globally
+x5(t) -> globally
+x6(t) -> globally
+x7(t) -> globally
+x8(t) -> globally
+x9(t) -> globally
+P -> globally
+Smax -> globally
+alpha_NAb -> globally
+alpha_VLSG -> globally
+beta -> globally
+delta -> globally
+eta -> globally
+rho -> globally
+theta -> globally
+
+-----------------------------------------
+-- Identification of identifiable functions (without states)--
+-----------------------------------------
+1 -> theta
+2 -> rho
+3 -> eta
+4 -> delta
+5 -> beta
+6 -> alpha_VLSG
+7 -> alpha_NAb
+8 -> Smax
+9 -> P
+10 -> x9(t)
+11 -> x8(t)
+12 -> x7(t)
+13 -> x6(t)
+14 -> x5(t)
+15 -> x4(t)
+16 -> x3(t)
+17 -> x2(t)
+18 -> x1(t)
+
+-----------------------------------------
+-- Study of the global identifiability with IC known on SL ASCs --
+-----------------------------------------
+x1(0) -> globally
+x2(0) -> globally
+x3(0) -> globally
+x4(0) -> globally
+x5(0) -> globally
+x6(0) -> globally
+x7(0) -> globally
+x8(0) -> globally
+x9(0) -> globally
+P -> globally
+Smax -> globally
+alpha_NAb -> globally
+alpha_VLSG -> globally
+beta -> globally
+delta -> globally
+eta -> globally
+rho -> globally
+theta -> globally

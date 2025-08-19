@@ -63,7 +63,13 @@ This folder includes:
     code developed to perform descriptive analysis of viral and antibody
     dynamics (separately) and generate figures for publication.
 
-### **2) Model Estimation** (folder *Model_Estimation_Monolix*)
+### **2) Model Identifiability** (folder *Model_Identifiability_Julia*)
+
+This folder includes:
+1.  **Julia codes for identifiability analysis**. Original Julia codes (.jl files) 
+
+
+### **3) Model Estimation** (folder *Model_Estimation_Monolix*)
 
 This folder includes:
 
@@ -82,3 +88,4 @@ This folder includes:
 3.  **R codes for Monolix results analysis**. Original R codes developed
     to generate/analysis and visualize model results after Monolix
     estimation.
+
