@@ -56,7 +56,7 @@ simulation of dynamics of the immune marker (labeled ECLRBD) which has
 been identified as relevant mCoP in our analysis and we added simulation
 of “fack” immune markers, simulated as white noise.
 
-### **2) R and Mlxtran codes** (folder *Rcode*)
+### **2) R codes** (folder *Rcode*)
 
 This folder includes:
 
@@ -77,6 +77,19 @@ This folder includes:
     of the mechanistic model used to simulate viral dynamics once model
     parameters fixed (either after model estimation of by choosing
     parameters’ values).
+
+### **3) Mlxtran codes** (folder *Mlxtran_Models*)
+
+This folder includes nine mlxtran models describing the viral model
+adjusted for 0, 1 or 2 covariates, whether baseline or time-varying
+covariates.
+
+### **4) Model Estimation** (folder *Monolix_Estimation*)
+
+This folder includes multiple Monolix projects that have been estimated
+in the project: (1) Model `without covariates`, (2) Models with `Group`
+covariates, whether on parameters beta or delta, (3) Models adjusted for
+`Time-varying covariates`.
 
 ## **Bibliography**
 
