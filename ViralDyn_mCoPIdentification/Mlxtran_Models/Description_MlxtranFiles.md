@@ -1,0 +1,37 @@
+
+# **Description of the mlxtran files **
+
+Author: Marie Alexandre  
+Date: 2021-11-24
+
+Each text file correspond to the mlxtran code describing a specific
+model and need to be uploaded within the Monolix software (developed by
+Lixoft) as model file to be used. In this folder, 9 model files are
+given. They can be clustered into 3 groups
+
+1.  The basic model used in the project to fit viral load dynamics
+    without any adjustment of parameters for covariates. However,
+    adjustment for categorical covariates defined in the datasets could
+    be added directly in the Monolix software
+    {*MlxtranCode_MechanisticModel_SARSCoV2_VL_NoExternalCov.txt*}  
+2.  The basic model with two model parameters adjusted for 1 or 2
+    time-varying covariates (beta and delta) as described below:
+    - The parameter beta adjusted for 1 covariate
+      {*MlxtranCode_MechanisticModel_SARSCoV2_VL_TimeVaryingCovBeta.txt*}  
+    - The parameter delta adjusted for 1 covariate
+      {*MlxtranCode_MechanisticModel_SARSCoV2_VL_TimeVaryingCovDelta.txt*}  
+    - The parameter beta adjuste for 2 covariates
+      {*MlxtranCode_MechanisticModel_SARSCoV2_VL_2TimeVaryingCovBeta.txt*}  
+    - The parmeter beta adjusted for 1 covariate and delta for the other
+      {*MlxtranCode_MechanisticModel_SARSCoV2_VL_1TimeVaryingCovBeta_1TimeVaryingCovDelta.txt*}.  
+3.  The basic model with two model parameters adjusted for 1 or 2
+    baseline covariates (covariates measured at the initial time of the
+    study) (beta and delta) as described below:
+    - The parameter beta adjusted for 1 covariate
+      {*MlxtranCode_MechanisticModel_SARSCoV2_VL_BaselineCovBeta.txt*}  
+    - The parameter delta adjusted for 1 covariate
+      {*MlxtranCode_MechanisticModel_SARSCoV2_VL_BaselineCovDelta.txt*}  
+    - The parameter beta adjuste for 2 covariates
+      {*MlxtranCode_MechanisticModel_SARSCoV2_VL_2BaselineCovBeta.txt*}  
+    - The parmeter beta adjusted for 1 covariate and delta for the other
+      {*MlxtranCode_MechanisticModel_SARSCoV2_VL_1BaselineCovBeta_1BaselineCovDelta.txt*}.
